@@ -11,8 +11,8 @@
 #SBATCH --job-name=wiki_full
 source /home2/arjunth2001/miniconda3/etc/profile.d/conda.sh
 conda activate legal
-mkdir -p /scratch/arjunth2001/
-scp -r arjunth2001@ada:'/share1/arjunth2001/data' /scratch/arjunth2001/
+mkdir -p /scratch/arjunth2001/data
+scp -r arjunth2001@ada:'/share1/arjunth2001/enwiki.xml.bz2' /scratch/arjunth2001/data
 python make_index.py
 cd /scratch/arjunth2001/data
 rm -rf enwiki.xml.bz2
