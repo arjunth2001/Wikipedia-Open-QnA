@@ -15,7 +15,7 @@ module load cudnn/7.6-cuda-10.0
 module load TensorRT/7.2.2.3
 source /home2/arjunth2001/miniconda3/etc/profile.d/conda.sh
 conda activate py37
-mkdir /scratch/arjunth2001
-scp -r arjunth2001@ada.iiit.ac.in:'/share1/arjunth2001/drqa' /scratch/arjunth2001
-papermill  --request-save-on-cell-execute --log-output --log-level INFO --progress-bar train.ipynb /scratch/arjunth2001/train.ipynb
-cat /scratch/arjun_drqa.txt | grep "Epoch train loss"  > out.txt
+mkdir -p /scratch/arjunth2001/
+scp -r arjunth2001@ada.iiit.ac.in:'/share1/arjunth2001/drqa_2/data' /scratch/arjunth2001
+python train.py
+rclone copy -P /scratch/arjun_drqa.txt  onedrive:/Adv_nlp_module_2
