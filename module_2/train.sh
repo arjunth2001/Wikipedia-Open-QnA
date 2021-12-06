@@ -18,4 +18,3 @@ conda activate py37
 mkdir -p /scratch/arjunth2001/
 scp -r arjunth2001@ada.iiit.ac.in:'/share1/arjunth2001/drqa_2/data' /scratch/arjunth2001
 python train.py
-rclone copy -P /scratch/arjun_drqa.txt  onedrive:/Adv_nlp_module_2

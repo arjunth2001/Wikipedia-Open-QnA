@@ -3,11 +3,7 @@ import os
 import logging
 import re
 import string
-import sys
 import torch
-from torch._C import device
-
-from torch.serialization import default_restore_location
 from tokenizer import SpacyTokenizer
 
 
@@ -30,8 +26,8 @@ def load_embedding(embed_weight, embed_path, dictionary):
 
     for word, count in word_counts.items():
         embed_weight[dictionary.index(word)].div_(count)
-    logging.info('Loaded {} / {} word embeddings ({:.2f}%)'.format(len(word_counts),
-                 len(dictionary), 100 * len(word_counts) / len(dictionary)))
+    print('Loaded {} / {} word embeddings ({:.2f}%)'.format(len(word_counts),
+                                                            len(dictionary), 100 * len(word_counts) / len(dictionary)))
 
 
 def save_checkpoint(args, model, optimizer, lr_scheduler, epoch, f1_score):
@@ -58,6 +54,7 @@ def save_checkpoint(args, model, optimizer, lr_scheduler, epoch, f1_score):
 def load_checkpoint(args, model, optimizer, lr_scheduler, device):
     checkpoint_path = os.path.join(args.checkpoint_dir, "model.pt")
     if os.path.isfile(checkpoint_path):
+        print("Loaded Checkpoint")
         state_dict = torch.load(
             checkpoint_path, map_location=device)
         model.load_state_dict(state_dict['model'])
