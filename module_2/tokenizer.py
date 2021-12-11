@@ -15,7 +15,10 @@ class SpacyTokenizer(object):
         self.nlp = spacy.load(model, disable=disabled_components)
 
     def tokenize(self, text):
-        tokens = self.nlp(text.rstrip())
+        text = text.rstrip()
+        if len(text.split()) == 0:
+            text = "something"
+        tokens = self.nlp(text)
         return {
             'text': text,
             'tokens': [self.normalize(t.text) for t in tokens],
